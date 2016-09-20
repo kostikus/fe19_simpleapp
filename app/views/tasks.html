@@ -1,0 +1,45 @@
+<div class="container">
+        <br><br>
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <form ng-submit="tasks.addTask()">
+                <input ng-model="tasks.newTask.text" type="text" class="form-control">
+                <button type="submit" class="btn btn-block btn-success">Add task</button>
+            </form>
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Task text</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="t in tasks.tasks">
+                        <td>
+                            <span ng-if="!edit">{{t.text}}</span>
+                            <input ng-if="edit" type="text" class="form-control" ng-model="t.text">
+                        </td>
+                        <td>{{t.done}}</td>
+                        <td>
+                            <button class="btn btn-danger" ng-click="tasks.rmTask($index)">Delete</button>
+
+                            <button ng-if="!t.done" class="btn btn-success" ng-click="tasks.doTask($index)">Do</button>
+                            <button ng-if="t.done" class="btn btn-warning" ng-click="tasks.undoTask($index)">unDo</button>
+
+                            <button class="btn btn-info" ng-show="!edit" ng-click="edit = true">Edit</button>
+                            <button class="btn btn-success" ng-show="edit" ng-click="edit = false">Save</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
